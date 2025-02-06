@@ -9,3 +9,7 @@ while (j >= 0) {
     console.log('Current value = ' + j);
     j -= 10;
 }
+
+for (let j = 100; j >= 0; j -= 10) {
+    console.log('Current value = ' + j);
+}
