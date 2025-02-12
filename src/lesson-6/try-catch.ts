@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const primaryUrl = "https://nonexistent.com/api";
-const fallbackUrl = "https://learngitbranching.js.org/";
+const fallbackUrl = "https://api.thecatapi.com/v1/images/search";
 
 async function fetchData() {
     try {
