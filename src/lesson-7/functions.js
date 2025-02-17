@@ -1,14 +1,13 @@
 function sumArray(array) {
-    let result = array[0];
-
-    for (let i = 1; i < array.length; i++) {
-        result = result + array[i];
+    if (array.length === 0) {
+        throw new Error("Array cannot be empty");
     }
-
-    return result;
+    if (typeof array[0] === "number") {
+        return array.reduce(function (acc, val) { return acc + val; }, 0);
+    }
+    return array.reduce(function (acc, val) { return acc + val; }, "");
 }
-const arrayNumber = [10, 20, 30];
-
-
-console.log(sumArray(arrayNumber));
-console.log(sumArray(['hello', ' ', 'world!']));
+var arrayNumber = [10, 20, 30];
+var arrayString = ['hello', ' ', 'world!'];
+console.log(sumArray(arrayNumber)); // 60
+console.log(sumArray(arrayString)); // "hello world!"
