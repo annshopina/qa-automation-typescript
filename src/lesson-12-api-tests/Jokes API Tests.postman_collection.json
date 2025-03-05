@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "6baf2eed-713c-40c6-9063-fdac15a9e988",
+		"name": "Jokes API Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1782423"
+	},
+	"item": [
+		{
+			"name": "Basic check jokes/ten",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "pm.test(\"Status 200\", function () {\n    pm.response.to.have.status(200);\n});",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/jokes/ten",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"jokes",
+						"ten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check jokes/random in JSON",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "pm.test(\"Response JSON\", function () {\n    pm.response.to.be.json;\n});",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/jokes/random",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"jokes",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check invalid endpoint",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "pm.test(\"Not found 404\", function () {\n    pm.response.to.have.status(404);\n});",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/invalid-test-endpoint",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"invalid-test-endpoint"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check response is not empty",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "pm.test(\"Response is not empty\", function () {\n    pm.expect(pm.response.text()).to.not.be.empty;\n});",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/jokes/random",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"jokes",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check array consists of 10 elements",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "pm.test(\"Response consists of 10 jokes\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData).to.be.an(\"array\");\n    pm.expect(jsonData.length).to.eql(10);\n});",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/jokes/ten",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"jokes",
+						"ten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check headers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "pm.test(\"Content-Type should be JSON\", function () {\n    pm.response.to.have.header(\"Content-Type\", \"application/json; charset=utf-8\");\n});",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/jokes/random",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"jokes",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check keys",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "pm.test(\"Each joke should have setup and punchline\", function () {\n    var jsonData = pm.response.json();\n    jsonData.forEach((joke) => {\n        pm.expect(joke).to.have.property(\"setup\");\n        pm.expect(joke).to.have.property(\"punchline\");\n    });\n});",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/jokes/ten",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"jokes",
+						"ten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check all jokes are unique",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "pm.test(\"All jokes should be unique\", function () {\n    var jsonData = pm.response.json();\n    var jokeSet = new Set(jsonData.map(j => j.setup));\n    pm.expect(jokeSet.size).to.eql(jsonData.length);\n});",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/jokes/ten",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"jokes",
+						"ten"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check length",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "pm.test(\"Joke text should not be too short\", function () {\n    var jsonData = pm.response.json();\n    pm.expect(jsonData.setup.length).to.be.above(5);\n    pm.expect(jsonData.punchline.length).to.be.above(3);\n});",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/jokes/random",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"jokes",
+						"random"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\npm.test(\"ID\", () => pm.expect(pm.response.json()).to.have.property(\"id\"));",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/jokes/5",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"jokes",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
